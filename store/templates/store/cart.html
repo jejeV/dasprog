@@ -8,13 +8,13 @@
         <a class="btn btn-outline-dark" href="{% url 'store'%}"><i class='bx bx-left-arrow-alt'>Back</i></a>
         <br>
         <br>
-        <table class="table">
+        <table class="table table-responsive">
           <tr>
             <th>
-              <h5>Items: <strong>3</strong></h5>
+              <h5>Items: <strong>{{order.get_cart_items}}</strong></h5>
             </th>
             <th>
-              <h5>Total: <strong>RP.600.000</strong></h5>
+              <h5>Total: <strong>{{order.get_cart_total|floatformat:2}}</strong></h5>
             </th>
             <th>
               <a style="float: right; margin:5px" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
@@ -26,31 +26,35 @@
     <br>
     <div class="card">
       <div class="card-body">
-        <table class="table">
-          <tbody>
-            <tr class="fw-bold">
-              <th></th>
-              <td>Items</td>
-              <td>Price</td>
-              <td>Quantity</td>
-              <td>Total</td>
-            </tr>
-            <tr>
-              <th><img class="row-image" src="{% static 'images/key.jpg' %}"></th>
-              <td>Keyboard</td>
-              <td>RP 200.000</td>
-              <td>
-                <p class="quantity">2</p>
-                <div class="quantity">
-                  <img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
-
-                  <img class="chg-quantity" src="{% static  'images/arrow-down.png' %}">
-                </div>
-              </td>
-              <td>RP 400.000</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+              <tr class="fw-bold">
+                <th></th>
+                <td>Items</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Total</td>
+              </tr>
+              
+              {% for item in items %}
+              <tr>
+                <th><img class="row-image" src="{{item.product.image.url}}"></th>
+                <td>{{item.product.name}}</td>
+                <td>RP {{item.product.price|floatformat:3}}</td>
+                <td>
+                  <p class="quantity">{{item.quantity}}</p>
+                  <div class="quantity">
+                    <img class="chg-quantity" src="{% static  'images/arrow-up.png' %}">
+                    <img class="chg-quantity" src="{% static  'images/arrow-down.png' %}">
+                  </div>
+                </td>
+                <td>{{item.get_total|floatformat:3}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>

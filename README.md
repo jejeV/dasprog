@@ -32,10 +32,7 @@ Run Django project
    python3 manage.py runserver
 ```
 
-
-
 ## Us rn
-
 ![hippo](https://media.giphy.com/media/3QWfMsI8IaarXxtBt6/giphy.gif)
 
 
